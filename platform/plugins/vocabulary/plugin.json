@@ -1,0 +1,9 @@
+{
+    "name": "Vocabulary",
+    "namespace": "Botble\\Vocabulary\\",
+    "provider": "Botble\\Vocabulary\\Providers\\VocabularyServiceProvider",
+    "author": "Tiến Dương",
+    "url": "https://www.facebook.com/duong.tien.5249349",
+    "version": "1.0",
+    "description": "List vocabulary"
+}
