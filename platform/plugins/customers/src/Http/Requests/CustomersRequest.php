@@ -18,6 +18,8 @@ class CustomersRequest extends Request
     {
         return [
             'name'   => 'required',
+            'email' => 'required',
+            'password' => 'required',
             'status' => Rule::in(BaseStatusEnum::values()),
         ];
     }

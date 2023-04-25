@@ -15,6 +15,8 @@ use Botble\Base\Events\UpdatedContentEvent;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Customers\Forms\CustomersForm;
 use Botble\Base\Forms\FormBuilder;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class CustomersController extends BaseController
 {
@@ -50,7 +52,7 @@ class CustomersController extends BaseController
     {
         page_title()->setTitle(trans('plugins/customers::customers.create'));
 
-        return $formBuilder->create(CustomersForm::class)->renderForm();
+        return $formBuilder->create(CustomersForm::class)->remove('is_change_password')->renderForm();
     }
 
     /**
@@ -60,8 +62,12 @@ class CustomersController extends BaseController
      */
     public function store(CustomersRequest $request, BaseHttpResponse $response)
     {
-        $customers = $this->customersRepository->createOrUpdate($request->input());
-
+        // $customers = $this->customersRepository->createOrUpdate($request->input());
+        $customers = $this->customersRepository->getModel();
+        $customers->fill($request->input());
+        $customers->password = Hash::make($request->input('password'));
+        $customers->birthday = Carbon::parse($request->input('birthday'))->toDateString();
+        $customers = $this->customersRepository->createOrUpdate($customers);
         event(new CreatedContentEvent(CUSTOMERS_MODULE_SCREEN_NAME, $request, $customers));
 
         return $response
@@ -97,8 +103,12 @@ class CustomersController extends BaseController
     {
         $customers = $this->customersRepository->findOrFail($id);
 
-        $customers->fill($request->input());
+        $customers->fill($request->except('password'));
 
+        if ($request->input('is_change_password') == 1) {
+            $customers->password = Hash::make($request->input('password'));
+        }
+        $customers->birthday = Carbon::parse($request->input('birthday'))->toDateString();
         $customers = $this->customersRepository->createOrUpdate($customers);
 
         event(new UpdatedContentEvent(CUSTOMERS_MODULE_SCREEN_NAME, $request, $customers));

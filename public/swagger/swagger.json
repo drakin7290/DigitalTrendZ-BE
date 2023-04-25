@@ -187,6 +187,103 @@
                     }
                 }
             }
+        },
+        "/api/v1/customer/attendance": {
+            "post": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Get a JWT via given credentials",
+                "description": "Returns a JWT token",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Email address",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "Password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "data": {
+                                    "properties": {
+                                        "access_token": {
+                                            "type": "string",
+                                            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvYXBpL2xvZ2luIiwiaWF0IjoxNjIwNjIxNjA4LCJleHAiOjE2MjA2Mjc2MDgsIm5iZiI6MTYyMDYyMTYwOCwianRpIjoiTzRVMTM4Q2Fpd1JjM2lxbSJ9.SD_iJmpMSjcnhldl-SP_Gb0Lv9pTde0J32A-JfKzZoU"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "bearer"
+                                        },
+                                        "expires_in": {
+                                            "type": "integer",
+                                            "example": 3600
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "headers": {
+                            "Authorization": {
+                                "description": "Bearer {token}",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request data",
+                        "schema": {
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "message": {
+                                    "type": "object",
+                                    "example": {
+                                        "email": [
+                                            "The email field is required."
+                                        ]
+                                    }
+                                },
+                                "type": {
+                                    "type": "integer",
+                                    "example": 400
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "definitions": {

@@ -72,7 +72,7 @@ class MemberController extends BaseController
     {
         $member = $this->memberRepository->getModel();
         $member->fill($request->input());
-        $member->confirmed_at = now();
+        $member->password_confirmation = now();
         $member->password = bcrypt($request->input('password'));
         $member->dob = Carbon::parse($request->input('dob'))->toDateString();
 

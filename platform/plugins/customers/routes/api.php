@@ -10,5 +10,7 @@ Route::group([
     Route::prefix('customer')->group(function () {
         Route::post('login', 'CustomerController@login');
         Route::post('register', 'CustomerController@register');
+        Route::get('logout', 'CustomerController@logout');
+        Route::post('attendance', 'CustomerController@attendance');
     });
 });

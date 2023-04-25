@@ -32,6 +32,11 @@ class Customers extends BaseModel implements JWTSubject, AuthenticatableContract
         'remember_token',
     ];
 
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
     /**
      * @var array
      */
