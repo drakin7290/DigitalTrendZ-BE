@@ -33,19 +33,19 @@ class CustomersServiceProvider extends ServiceProvider
             ->loadAndPublishViews()
             ->loadRoutes(['web', 'api']);
 
-        if (defined('LANGUAGE_MODULE_SCREEN_NAME')) {
-            if (defined('LANGUAGE_ADVANCED_MODULE_SCREEN_NAME')) {
-                // Use language v2
-                \Botble\LanguageAdvanced\Supports\LanguageAdvancedManager::registerModule(Customers::class, [
-                    'name',
-                ]);
-            } else {
-                // Use language v1
-                $this->app->booted(function () {
-                    \Language::registerModule([Customers::class]);
-                });
-            }
-        }
+        // if (defined('LANGUAGE_MODULE_SCREEN_NAME')) {
+        //     if (defined('LANGUAGE_ADVANCED_MODULE_SCREEN_NAME')) {
+        //         // Use language v2
+        //         \Botble\LanguageAdvanced\Supports\LanguageAdvancedManager::registerModule(Customers::class, [
+        //             'name',
+        //         ]);
+        //     } else {
+        //         // Use language v1
+        //         $this->app->booted(function () {
+        //             \Language::registerModule([Customers::class]);
+        //         });
+        //     }
+        // }
 
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([

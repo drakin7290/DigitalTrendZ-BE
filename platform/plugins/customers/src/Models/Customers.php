@@ -26,10 +26,13 @@ class Customers extends BaseModel implements JWTSubject, AuthenticatableContract
     protected $fillable = [
         'name',
         'email',
-        'password',
         'phone',
+        'gender',
+        'attendance_day',
         'is_active',
-        'remember_token',
+        'birthday',
+        'attendance',
+        'avatar',
     ];
 
     protected $hidden = [
