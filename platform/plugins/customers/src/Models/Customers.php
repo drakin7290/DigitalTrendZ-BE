@@ -26,6 +26,7 @@ class Customers extends BaseModel implements JWTSubject, AuthenticatableContract
     protected $fillable = [
         'name',
         'email',
+        'student_id',
         'phone',
         'gender',
         'attendance_day',

@@ -30,6 +30,14 @@ class CustomersForm extends FormAbstract
                     'data-counter' => 120,
                 ],
             ])
+            ->add('student_id', 'text', [
+                'label'      => 'Student ID',
+                'label_attr' => ['class' => 'control-label required'],
+                'attr'       => [
+                    'placeholder'  => 'DTHxxxyyy',
+                    'data-counter' => 120,
+                ],
+            ])
             ->add('email', 'email', [
                 'label'      => 'Email',
                 'label_attr' => ['class' => 'control-label required'],
@@ -40,7 +48,7 @@ class CustomersForm extends FormAbstract
             ])
             ->add('phone', 'tel', [
                 'label'      => 'Phone',
-                'label_attr' => ['class' => 'control-label required'],
+                'label_attr' => ['class' => 'control-label'],
                 'attr'       => [
                     'placeholder'  => 'Phone',
                     'data-counter' => 120,

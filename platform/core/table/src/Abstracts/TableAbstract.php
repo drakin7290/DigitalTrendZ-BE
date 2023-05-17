@@ -1067,7 +1067,7 @@ abstract class TableAbstract extends DataTable
         }
 
         return Html::image(
-            RvMedia::getImageUrl($image, 'thumb', false, RvMedia::getDefaultImage()),
+            RvMedia::getImageUrl($image, '', false, RvMedia::getDefaultImage()),
             trans('core/base::tables.image'),
             $attributes
         );

@@ -28,7 +28,7 @@ class CustomerController extends BaseController
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email',
+            'student_id' => 'required|string',
             'password' => 'required|string',
         ]);
 
@@ -36,17 +36,19 @@ class CustomerController extends BaseController
             return $this->respondWithError($validator->errors(), 400);
         }
 
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['student_id', 'password']);
 
 
         if (!$token = auth('api')->attempt($credentials)) {
             return $this->respondWithError("Unauthorized", 401);
         }
 
+        $user = Customers::where('student_id', $request->input('student_id'))->get();
+
         // Customers::where('email', $request->email)->update(array(
         //     'remember_token' => $token
         // ));
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token, $user[0]);
     }
 
 
@@ -77,12 +79,13 @@ class CustomerController extends BaseController
 
 
 
-    protected function respondWithToken($token)
+    protected function respondWithToken($token, $user)
     {
         return response()->json([
             "error" => false,
             "data" => [
                 'access_token' => $token,
+                'user' => $user,
                 'token_type' => 'bearer',
                 'expires_in' => auth('api')->factory()->getTTL() * 60
             ]

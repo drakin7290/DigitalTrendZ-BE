@@ -169,3 +169,7 @@ if (!defined('BASE_FILTER_HEADER_LAYOUT_TEMPLATE')) {
 if (!defined('BASE_FILTER_MENU_ITEMS_COUNT')) {
     define('BASE_FILTER_MENU_ITEMS_COUNT', 'base_filter_menu_items_count');
 }
+
+if (!defined('URL_FOREIGN_SYMBOL')) {
+    define('URL_FOREIGN_SYMBOL', '!*&~@#$/^%#^$#$');
+}

@@ -98,6 +98,7 @@ class CustomersTable extends TableAbstract
             ->select([
                 'id',
                 'name',
+                'student_id',
                 'email',
                 'gender',
                 'phone',
@@ -124,6 +125,10 @@ class CustomersTable extends TableAbstract
             // ],
             'name' => [
                 'title' => trans('core/base::tables.name'),
+                'class' => 'text-start',
+            ],
+            'student_id' => [
+                'title' => 'Student ID',
                 'class' => 'text-start',
             ],
             'attendance' => [
@@ -180,26 +185,26 @@ class CustomersTable extends TableAbstract
     /**
      * {@inheritDoc}
      */
-    public function getBulkChanges(): array
-    {
-        return [
-            'name' => [
-                'title'    => trans('core/base::tables.name'),
-                'type'     => 'text',
-                'validate' => 'required|max:120',
-            ],
-            'status' => [
-                'title'    => trans('core/base::tables.status'),
-                'type'     => 'select',
-                'choices'  => BaseStatusEnum::labels(),
-                'validate' => 'required|in:' . implode(',', BaseStatusEnum::values()),
-            ],
-            'created_at' => [
-                'title' => trans('core/base::tables.created_at'),
-                'type'  => 'date',
-            ],
-        ];
-    }
+    // public function getBulkChanges(): array
+    // {
+    //     return [
+    //         'name' => [
+    //             'title'    => trans('core/base::tables.name'),
+    //             'type'     => 'text',
+    //             'validate' => 'required|max:120',
+    //         ],
+    //         'status' => [
+    //             'title'    => trans('core/base::tables.status'),
+    //             'type'     => 'select',
+    //             'choices'  => BaseStatusEnum::labels(),
+    //             'validate' => 'required|in:' . implode(',', BaseStatusEnum::values()),
+    //         ],
+    //         'created_at' => [
+    //             'title' => trans('core/base::tables.created_at'),
+    //             'type'  => 'date',
+    //         ],
+    //     ];
+    // }
 
     /**
      * @return array

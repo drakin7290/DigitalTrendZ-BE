@@ -27,7 +27,7 @@
                 ],
                 "parameters": [
                     {
-                        "name": "email",
+                        "name": "student_id",
                         "in": "formData",
                         "description": "Email address",
                         "required": true,

@@ -12,7 +12,7 @@ class APIController extends Controller
      *     description="Returns a JWT token",
      *     produces={"application/json"},
      *     @SWG\Parameter(
-     *         name="email",
+     *         name="student_id",
      *         in="formData",
      *         description="Email address",
      *         required=true,
